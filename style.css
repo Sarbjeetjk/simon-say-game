@@ -1,0 +1,171 @@
+
+
+body {
+    text-align: center;
+}
+
+.btn {
+    width: 200px;
+    height: 200px;
+    border: 10px solid black;
+    border-radius: 30%;
+    display: inline-block;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.simon-game {
+    height: 90vh;
+}
+
+#showHighscoreBtn {
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+#showHighscoreBtn:hover {
+    background-color: #0056b3;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+}
+.yellow {
+    background-color: #f99b45;
+}
+.red {
+    background-color:#d95980;
+}
+.green {
+    background-color: #63aac0;
+}
+.purple {
+    background-color: #819ff9;
+}
+.flash {
+    opacity: 0.5;
+    color: #000;
+}
+.userflash {
+    background-color: thistle;
+}
+
+
+nav{
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    background: linear-gradient(rgba(201, 112, 112, 0.4), #000);
+    justify-content: space-between;
+    flex-wrap: wrap;
+    
+}
+
+.container{
+    padding: 10px 10%;
+}
+.nav_d{
+    width: 100%;
+     position: sticky;
+     z-index: 10;
+    top: 0px;
+    flex: 1;
+    
+}
+.nav_d ul {
+    margin-right: 250px;
+  
+}
+
+.logo{
+    width: 160px;
+    height: 60px;
+    margin-left: 10%;
+   background-image: url(logo_.png);
+   background-size: cover;
+   background-position: center;
+   
+
+}
+nav ul li {
+    display: inline-block;
+    list-style: none;
+    margin: 10px 20px;
+}
+nav ul li a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    position: relative;
+
+}
+nav ul li a::after {
+    content: '';
+    width: 0;
+    height: 3px;
+    background: #ff004f;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    transition: 0.5s;
+}
+nav ul li a:hover::after{
+    width: 100%;
+}
+
+.header_text {
+    margin-top: 20%;
+    font-size: 30px;
+}
+.header_text h1 {
+    font-size: 60px;
+   
+}
+.header_text span {
+    color: #ff004f;
+}
+
+.social_icons a {
+    text-decoration: none;
+    font-size: 30px;
+    margin-top: 20px;
+    margin-right: 20px;
+    color: #ababab;
+    display: inline-block;
+    transition: 0.5s;
+}
+
+.social_icons a:hover {
+    color: #ff004f;
+    transform: translateY(-5px);
+
+}
+
+
+
+.copyright {
+   
+    text-align: center;
+    padding: 10px;
+    background: #262626;
+    color: antiquewhite;
+    font-weight: 400;
+    margin-top: 10px;
+    margin-bottom: -5px;
+}
+.copyright i{
+    color: #ed2262;
+
+}
+
+
+nav .fas{
+    display: none;
+}
