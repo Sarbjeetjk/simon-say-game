@@ -9,13 +9,17 @@ body {
     height: 200px;
     border: 10px solid black;
     border-radius: 30%;
-    display: inline-block;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     margin: 10px;
     cursor: pointer;
 }
 
 .simon-game {
-    height: 90vh;
+    height: 100vh;
+    margin-bottom: 90px;
 }
 
 #showHighscoreBtn {
@@ -157,7 +161,7 @@ nav ul li a:hover::after{
     background: #262626;
     color: antiquewhite;
     font-weight: 400;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: -5px;
 }
 .copyright i{
@@ -168,4 +172,57 @@ nav ul li a:hover::after{
 
 nav .fas{
     display: none;
+}
+
+@media (max-width: 768px) {
+    .btn {
+        width: 140px;
+        height: 140px;
+        border-width: 8px;
+        font-size: 16px;
+    }
+
+    #showHighscoreBtn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    nav ul li {
+        margin: 8px 12px;
+    }
+
+    nav ul li a {
+        font-size: 16px;
+    }
+
+    .nav_d ul {
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .btn {
+        width: 110px;
+        height: 110px;
+        border-width: 6px;
+        font-size: 14px;
+    }
+
+    #showHighscoreBtn {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    nav {
+        padding: 10px;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 8px 0;
+    }
+
+    .logo {
+        margin-left: 5%;
+    }
 }
