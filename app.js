@@ -5,11 +5,12 @@ let btns = ["yellow","red","purple","green"];
 
 let started = false;
 let level = 0;
+let levelUpTimeout = null;
 
 // Track highscore for current user (per browser) using localStorage
 let highScore = Number(localStorage.getItem("simonHighscore")) || 0;
 
-let h2 = document.querySelector("h2");
+let statusHeading = document.querySelector("h4");
 let highscoreBtn = document.querySelector("#showHighscoreBtn");
 let startBtn = document.querySelector("#startBtn");
 
@@ -25,13 +26,13 @@ function getRestartPrompt() {
 
 function updatePromptText() {
     if (!started) {
-        h2.innerText = getStartPrompt();
+        statusHeading.innerText = getStartPrompt();
     }
 }
 
 if (highscoreBtn) {
     highscoreBtn.addEventListener("click", function () {
-        h2.innerHTML = `Current Highscore: <b>${highScore}</b> <br> ${getStartPrompt()}`;
+        statusHeading.innerHTML = `Current Highscore: <b>${highScore}</b> <br> ${getStartPrompt()}`;
     });
 }
 
@@ -41,13 +42,24 @@ function startGame() {
         level = 0;
         gameseq = [];
         userseq = [];
-        h2.innerText = "level 0";
+        statusHeading.innerText = "level 0";
         levelUp();
     }
 }
 
+function restartAndStart() {
+    restartGame();
+    startGame();
+}
+
 if (startBtn) {
-    startBtn.addEventListener("click", startGame);
+    startBtn.addEventListener("click", function() {
+        if (started) {
+            restartAndStart();
+        } else {
+            startGame();
+        }
+    });
 }
 
 document.addEventListener("keypress", function() {
@@ -73,9 +85,8 @@ function userFlash(btn) {
 function levelUp() {
     userseq = [];
     level++;
-    h2.innerText = `level ${level}`;
-
-    let randIdx = Math.floor(Math.random() * 3);
+    statusHeading.innerText = `level ${level}`;
+    let randIdx = Math.floor(Math.random() * 4);
      let randColor = btns[randIdx];
      let randbtn = document.querySelector(`.${randColor}`);
     //  console.log(randbtn);
@@ -89,7 +100,7 @@ function levelUp() {
 function checkAnswer(lastIdx){
     if(userseq[lastIdx] === gameseq[lastIdx]){
         if(userseq.length === gameseq.length){
-            setTimeout(levelUp, 1000); 
+            levelUpTimeout = setTimeout(levelUp, 1000); 
         }
     } else {
         // Update highscore if current score is greater
@@ -98,7 +109,7 @@ function checkAnswer(lastIdx){
             localStorage.setItem("simonHighscore", highScore);
         }
 
-        h2.innerHTML = `Game Over..! Your score was <b>${level}</b> <br> Highscore: <b>${highScore}</b> <br> ${getRestartPrompt()}`;
+        statusHeading.innerHTML = `Game Over..! Your score was <b>${level}</b> <br> Highscore: <b>${highScore}</b> <br> ${getRestartPrompt()}`;
         document.querySelector("body").style.backgroundColor = "red";
         setTimeout(function() {
             document.querySelector("body").style.backgroundColor = "white";
@@ -109,6 +120,7 @@ function checkAnswer(lastIdx){
 }
 
 function btnPress(){
+    if (!started) return;
     console.log(this);
     let btn = this;
     userFlash(btn);
@@ -121,12 +133,17 @@ function btnPress(){
 }
 
 let allBtns = document.querySelectorAll(".btn");
-for(btn of allBtns){
+for(let btn of allBtns){
     btn.addEventListener("click", btnPress);
 };
 
 function restartGame(){
+    if (levelUpTimeout) {
+        clearTimeout(levelUpTimeout);
+        levelUpTimeout = null;
+    }
     level = 0;
     gameseq = [];
+    userseq = [];
     started = false;
 }

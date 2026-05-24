@@ -5,20 +5,20 @@ body {
 }
 
 .btn {
-    width: 200px;
-    height: 200px;
+    width: 160px;
+    height: 160px;
     border: 10px solid black;
     border-radius: 30%;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin: 10px;
+    margin: 5px;
     cursor: pointer;
 }
 
 .simon-game {
-    height: 100vh;
+    height: 110vh;
     margin-bottom: 90px;
 }
 
@@ -65,16 +65,16 @@ body {
     justify-content: center;
 }
 .yellow {
-    background-color: #f99b45;
+    background-color: #d7f722;
 }
 .red {
-    background-color:#d95980;
+    background-color:#f12864;
 }
 .green {
-    background-color: #63aac0;
+    background-color: #06f6a2;
 }
 .purple {
-    background-color: #819ff9;
+    background-color: #ab0af5;
 }
 .flash {
     opacity: 0.5;
