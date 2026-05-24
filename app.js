@@ -11,23 +11,50 @@ let highScore = Number(localStorage.getItem("simonHighscore")) || 0;
 
 let h2 = document.querySelector("h2");
 let highscoreBtn = document.querySelector("#showHighscoreBtn");
+let startBtn = document.querySelector("#startBtn");
+
+let isMobileDevice = ("ontouchstart" in window) || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+
+function getStartPrompt() {
+    return isMobileDevice ? "Tap Start to begin the game" : "Press Any Key to start the game";
+}
+
+function getRestartPrompt() {
+    return isMobileDevice ? "Tap Start to Restart" : "Press Any Key to Restart";
+}
+
+function updatePromptText() {
+    if (!started) {
+        h2.innerText = getStartPrompt();
+    }
+}
 
 if (highscoreBtn) {
     highscoreBtn.addEventListener("click", function () {
-        h2.innerHTML = `Current Highscore: <b>${highScore}</b> <br> Press Any Key to Start or Continue`;
+        h2.innerHTML = `Current Highscore: <b>${highScore}</b> <br> ${getStartPrompt()}`;
     });
 }
 
-document.addEventListener("keypress", function() {
-
-    
-    if(started == false){
-        console.log("game started");
+function startGame() {
+    if (!started) {
         started = true;
-
+        level = 0;
+        gameseq = [];
+        userseq = [];
+        h2.innerText = "level 0";
         levelUp();
     }
+}
+
+if (startBtn) {
+    startBtn.addEventListener("click", startGame);
+}
+
+document.addEventListener("keypress", function() {
+    startGame();
 });
+
+updatePromptText();
 
 function gameFlash(btn) {
     btn.classList.add("flash");
@@ -71,7 +98,7 @@ function checkAnswer(lastIdx){
             localStorage.setItem("simonHighscore", highScore);
         }
 
-        h2.innerHTML = `Game Over..!Your score was <b> ${level} </b> <br> Highscore: <b>${highScore}</b> <br> Press Any Key to Restart`;
+        h2.innerHTML = `Game Over..! Your score was <b>${level}</b> <br> Highscore: <b>${highScore}</b> <br> ${getRestartPrompt()}`;
         document.querySelector("body").style.backgroundColor = "red";
         setTimeout(function() {
             document.querySelector("body").style.backgroundColor = "white";
